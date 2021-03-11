@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 public class IncanGoldHelper {
 
+	//variables
 	int  round = 1,
+			//the number of any card drawn (use in switch case)
 			spiN = 0,
 			rocN = 0,
 			snaN = 0,
@@ -12,13 +14,17 @@ public class IncanGoldHelper {
 			firN = 0,
 			gem = 15,
 			artN = 1,
+			//number of artifacts stolen thus, removed from the game.
 			artS = 0,
+			//number of hazards left in the deck. If a hazard is drawn for the second time during a round,
+			//	that round ends and that hazard is removed from the game.
 			spiMax = 3,
 			rocMax = 3,
 			snaMax = 3,
 			mumMax = 3,
 			firMax = 3;
-			
+	
+	//used to calculate the odds of failure if one decides to stay in that round.
 	float failRate = 0,
 			deck = 0,
 			hazard = 0;
@@ -27,6 +33,7 @@ public class IncanGoldHelper {
 	
 	public static void main(String[] args) {
 		
+		//welcome message and instructions.
 		System.out.print("Welcome! \nType the newest card drawn as follows:"
 				+ "\n'gem', 'artifact', 'spider', 'rock', 'snake', 'mummy', 'fire'."
 				+ "\n'escape' when all players have safely left the cave"
