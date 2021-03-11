@@ -1,9 +1,13 @@
 package IncanGoldHelper;
 
-import java.util.Scanner;
+import java.awt.event.ActionEvent;
+
+//import java.util.Scanner;
 
 public class IncanGoldHelper {
 
+	
+	
 	//variables
 	int  round = 1,
 			//the number of any card drawn (use in switch case)
@@ -29,8 +33,6 @@ public class IncanGoldHelper {
 			deck = 0,
 			hazard = 0;
 	
-	Scanner inScan = new Scanner(System.in);
-	
 	public static void main(String[] args) {
 		
 		//welcome message and instructions.
@@ -41,84 +43,86 @@ public class IncanGoldHelper {
 				+ "\n'exit' to end the program"
 				+ "\n");
 		
-		IncanGoldHelper obj = new IncanGoldHelper();
-		obj.newRound();
+		new GUI();
+		
 
 	}
 	
 
-		
-	public void newRound() {
+	
+	
+	public String newRound(ActionEvent e) {
 		deck = gem + artN +
 				(spiMax-spiN) + (rocMax-rocN) + (snaMax-snaN) + (mumMax-mumN) + (firMax-firN);
-		System.out.print("Round "+round+"("+deck+" left)"+": \n");
-		String card = inScan.nextLine();
 		
-		switch (card) {
+		String txt = ("Round "+round+"("+deck+" left)"+": \n");
+		String out = "";
+		
+		switch (e.getActionCommand()) {
 			case "gem":
 				gem --;
-				calculate();
+				out = calculate();
 				break;
-			case "spider":
+			case "Spider":
 				spiN ++;
 				if (spiN == 2) {
 					spiMax --;
-					roundOver();
+					out = roundOver();
 				} else {
 					hazard += spiMax - 1;
-					calculate();
+					out = calculate();
 				}
 				break;
 			case "artifact":
 				artN --;
-				calculate();
+				out = calculate();
 				break;
-			case "rock":
+			case "Rocks":
 				rocN ++;
 				if (rocN == 2) {
 					rocMax --;
-					roundOver();
+					out = roundOver();
 				} else {
 					hazard += rocMax - 1;
-					calculate();
+					out = calculate();
 				}
 				break;
 			case "snake":
 				snaN ++;
 				if (snaN == 2) {
 					snaMax --;
-					roundOver();
+					out = roundOver();
 				} else {
 					hazard += snaMax - 1;
-					calculate();
+					out = calculate();
 				}
 				break;
 			case "mummy":
 				mumN ++;
 				if (mumN == 2) {
 					mumMax --;
-					roundOver();
+					out = roundOver();
 				} else {
 					hazard += mumMax - 1;
-					calculate();
+					out = calculate();
 				}
 				break;
 			case "fire":
 				firN ++;
 				if (firN == 2) {
 					firMax --;
-					roundOver();
+					out = roundOver();
 				} else {
 					hazard += firMax - 1;
-					calculate();
+					out = calculate();
 				}
 				break;
 			case "escape":
-				roundOver();
+				out = roundOver();
 				break;
 			case "steal":
 				artS ++;
-				System.out.print("Artifact Stolen!\n");
+				out = ("Artifact Stolen!\n");
 				break;
 			case "exit":
 				round = 6;
@@ -126,28 +130,23 @@ public class IncanGoldHelper {
 			
 		}
 		
-		if (round < 6) {
-			newRound();
-		} else {
-			System.out.print("Game Over!!!!");
-		}
+		return txt + out;
+		
 	}
 
 
-	private void roundOver() {
-		System.out.print("Round "+round+" over!\n");
+	private String roundOver() {
 		round ++;
 		artN = round - artS;
 		hazard = 0; spiN = 0; rocN = 0; snaN = 0; mumN = 0; firN = 0; gem = 15;
+		return ("Round "+round+" over!\n");
 	}
 	
 	
-	private void calculate() {
+	private String calculate() {
 		deck = gem + artN +
 				(spiMax-spiN) + (rocMax-rocN) + (snaMax-snaN) + (mumMax-mumN) + (firMax-firN);
 		failRate = Math.round(100 * (hazard / deck));
-		System.out.print(failRate + "% chance to fail\n");
+		return (failRate + "% chance to fail\n");
 	}
-
-
 }
