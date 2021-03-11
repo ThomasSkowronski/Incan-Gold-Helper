@@ -26,7 +26,6 @@ public class IncanGoldHelper {
 	Scanner inScan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		System.out.print("Welcome! \nType the newest card drawn as follows:"
 				+ "\n'gem', 'artifact', 'spider', 'rock', 'snake', 'mummy', 'fire'."
