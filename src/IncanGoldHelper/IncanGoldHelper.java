@@ -17,7 +17,7 @@ public class IncanGoldHelper {
 			mumN = 0,
 			firN = 0,
 			gem = 15,
-			artN = 1,
+			artN = 0,
 			//number of artifacts stolen thus, removed from the game.
 			artS = 0,
 			//number of hazards left in the deck. If a hazard is drawn for the second time during a round,
@@ -44,10 +44,7 @@ public class IncanGoldHelper {
 	
 	
 	public String newRound(ActionEvent e) {
-		deck = gem + artN +
-				(spiMax-spiN) + (rocMax-rocN) + (snaMax-snaN) + (mumMax-mumN) + (firMax-firN);
 		
-		String txt = ("<html>"+deck+" cards left in Round: "+round+": <br>");
 		String out = "";
 		
 		switch (e.getActionCommand()) {
@@ -114,10 +111,15 @@ public class IncanGoldHelper {
 				break;
 			case "Steal":
 				artS ++;
-				out = ("Artifact Stolen!\n");
+				out = ("Artifact Stolen!\n"+"("+artS+")");
 				break;
 			
 		}
+		
+		deck = gem + artN +
+				(spiMax-spiN) + (rocMax-rocN) + (snaMax-snaN) + (mumMax-mumN) + (firMax-firN);
+		
+		String txt = ("<html>"+deck+" cards left in Round: "+round+": <br>");
 		
 		return txt + out;
 		
