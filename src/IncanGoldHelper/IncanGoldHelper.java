@@ -34,15 +34,7 @@ public class IncanGoldHelper {
 			hazard = 0;
 	
 	public static void main(String[] args) {
-		
-		//welcome message and instructions.
-		System.out.print("Welcome! \nType the newest card drawn as follows:"
-				+ "\n'gem', 'artifact', 'spider', 'rock', 'snake', 'mummy', 'fire'."
-				+ "\n'escape' when all players have safely left the cave"
-				+ "\n'steal' when a player leaves with an artifact card"
-				+ "\n'exit' to end the program"
-				+ "\n");
-		
+				
 		new GUI();
 		
 
@@ -55,11 +47,11 @@ public class IncanGoldHelper {
 		deck = gem + artN +
 				(spiMax-spiN) + (rocMax-rocN) + (snaMax-snaN) + (mumMax-mumN) + (firMax-firN);
 		
-		String txt = ("Round "+round+"("+deck+" left)"+": \n");
+		String txt = ("<html>"+deck+" cards left in Round: "+round+": <br>");
 		String out = "";
 		
 		switch (e.getActionCommand()) {
-			case "gem":
+			case "Gems":
 				gem --;
 				out = calculate();
 				break;
@@ -73,7 +65,7 @@ public class IncanGoldHelper {
 					out = calculate();
 				}
 				break;
-			case "artifact":
+			case "Artifact":
 				artN --;
 				out = calculate();
 				break;
@@ -87,7 +79,7 @@ public class IncanGoldHelper {
 					out = calculate();
 				}
 				break;
-			case "snake":
+			case "Snake":
 				snaN ++;
 				if (snaN == 2) {
 					snaMax --;
@@ -97,7 +89,7 @@ public class IncanGoldHelper {
 					out = calculate();
 				}
 				break;
-			case "mummy":
+			case "Mummy":
 				mumN ++;
 				if (mumN == 2) {
 					mumMax --;
@@ -107,7 +99,7 @@ public class IncanGoldHelper {
 					out = calculate();
 				}
 				break;
-			case "fire":
+			case "Fire":
 				firN ++;
 				if (firN == 2) {
 					firMax --;
@@ -117,15 +109,12 @@ public class IncanGoldHelper {
 					out = calculate();
 				}
 				break;
-			case "escape":
+			case "Escape":
 				out = roundOver();
 				break;
-			case "steal":
+			case "Steal":
 				artS ++;
 				out = ("Artifact Stolen!\n");
-				break;
-			case "exit":
-				round = 6;
 				break;
 			
 		}
@@ -139,7 +128,13 @@ public class IncanGoldHelper {
 		round ++;
 		artN = round - artS;
 		hazard = 0; spiN = 0; rocN = 0; snaN = 0; mumN = 0; firN = 0; gem = 15;
-		return ("Round "+round+" over!\n");
+		if (round < 6) {
+			return ("Round "+(round-1)+" over!\n");
+		} else {
+			round = 1;
+			return ("Game over");
+		}
+		
 	}
 	
 	
@@ -147,6 +142,6 @@ public class IncanGoldHelper {
 		deck = gem + artN +
 				(spiMax-spiN) + (rocMax-rocN) + (snaMax-snaN) + (mumMax-mumN) + (firMax-firN);
 		failRate = Math.round(100 * (hazard / deck));
-		return (failRate + "% chance to fail\n");
+		return (failRate + "% chance to fail</html>");
 	}
 }
