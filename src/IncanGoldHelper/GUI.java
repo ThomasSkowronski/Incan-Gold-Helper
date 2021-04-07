@@ -30,6 +30,7 @@ public class GUI implements ActionListener {
 	private JPanel panelMid;
 	private JPanel panelBot;
 	private JLabel welcomeTxt;
+	private JLabel history;
 
 	
 	IncanGoldHelper obj = new IncanGoldHelper();
@@ -70,6 +71,7 @@ public class GUI implements ActionListener {
 		labelFailRate.setHorizontalAlignment(0);
 		
 		welcomeTxt = new JLabel();
+		history = new JLabel();
 		
 		panelTop = new JPanel();
 		panelTop.setBorder(BorderFactory.createEmptyBorder(30, 30, 0, 30));
@@ -79,6 +81,8 @@ public class GUI implements ActionListener {
 		welcomeTxt.setText
 			("<html>Welcome to the Incan Gold Helper!<br>Use the buttons below to select which card was drawn in each round.<br>If the artifact is stolen click 'Steal'.<br>If every player leaves before a second hazard is drawn, click 'Escape'</html>");
 		
+		panelTop.add(history);
+
 		panelMid = new JPanel();
 		panelMid.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 30));
 		panelMid.setLayout(new GridLayout(2, 0));
@@ -112,5 +116,6 @@ public class GUI implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		labelFailRate.setText(obj.newRound(e));
+		history.setText(obj.history(e));
 	}
 }
