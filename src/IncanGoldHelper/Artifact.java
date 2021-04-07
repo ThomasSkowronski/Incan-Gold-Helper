@@ -1,7 +1,6 @@
 package IncanGoldHelper;
 
 public class Artifact {
-    String name = "Artifact";
     int max, amt;
 
     public void artifactIns(){
